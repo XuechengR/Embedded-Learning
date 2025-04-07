@@ -31,7 +31,6 @@ Self-taught embedded knowledge
 - [Python](#Python)
   
 ### C
-学习图书《C和指针》
 (Related contents)
 ### C++
 (Related contents)
@@ -45,8 +44,11 @@ Operating System Fundamentals
 - [Embedded Linux](#Embedded-Linux)
 
 ### Real-Time OS
-- #### FreeRTOS
 (Related contents)
+- [FreeRTOS](#FreeRTOS)
+#### FreeRTOS
+(Related contents)
+
 ### Embedded Linux
 (Related contents)
 
@@ -90,39 +92,94 @@ Operating System Fundamentals
 
 ### Basic
 (Related contents)
-- UART
-- I2C
-- SPI
+- [UART](#UART)
+- [I2C](#I2C)
+- [SPI](#SPI)
+
+#### UART
+(Related contents)
+#### I2C
+(Related contents)
+#### SPI
+(Related contents)
+
 ### High-Speed
 (Related contents)
-- Ethemet
-- USB
+- [Ethemet](#Ethemet)
+- [USB](#USB)
+
+#### Ethemet
+(Related contents)
+#### USB
+(Related contents)
+
 ### Wireless
 (Related contents)
-- BuleTooth
-- Wi-Fi
-- LoRa
-- Zigbee
-- Thread
-- Matter
-- UWB
+- [BuleTooth](#BuleTooth)
+- [Wi-Fi](#Wi-Fi)
+- [LoRa](#LoRa)
+- [Zigbee](#Zigbee)
+- [Thread](#Thread)
+- [Matter](#Matter)
+- [UWB](#UWB)
+
+#### BuleTooth
+(Related contents)
+#### Wi-Fi
+(Related contents)
+#### LoRa
+(Related contents)
+#### Zigbee
+(Related contents)
+#### Thread
+(Related contents)
+#### Matter
+(Related contents)
+#### UWB
+(Related contents)
+
 ### Industrial
 (Related contents)
+
 ### Network
 (Related contents)
-TCP/IP
-UDP
+- [TCP/IP](#TCPIP)
+- [UDP](#UDP)
+
+#### TCP/IP
+(Related contents)
+#### UDP
+(Related contents)
+
 ### Automotive
 (Related contents)
-CAN
-LIN
-MOST
-FlexRay
+- [CAN](#CAN)
+- [LIN](#LIN)
+- [MOST](#MOST)
+- [FlexRay](#FlexRay)
+
+#### CAN
+(Related contents)
+#### LIN
+(Related contents)
+#### MOST
+(Related contents)
+#### FlexRay
+(Related contents)
+
 ### cellular
 (Related contents)
-GSM/LTE
-LTE-M/5G
-NB-loT
+- [GSM/LTE](#GSMLTE)
+- [LTE-M/5G](#LTE-M5G)
+- [NB-loT](#NB-loT)
+
+#### GSM/LTE
+(Related contents)
+#### LTE-M/5G
+(Related contents)
+#### NB-loT
+(Related contents)
+
 
 
 
