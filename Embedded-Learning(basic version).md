@@ -10,7 +10,7 @@
 
 ## Programming Languages
 - [C](#C)  
-- [C++](#C++)  
+- [C++](#C-1)  
 - [Python](#Python)
   
 ### C
