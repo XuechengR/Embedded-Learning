@@ -34,7 +34,7 @@ Self-taught embedded knowledge
 > 学习书籍《C和指针》（Pointers On C）
 
 1. [快速上手](#1.-快速上手)
-2. [基本概念](#基本概念)
+2. [基本概念](#2.-基本概念)
 3. [数据](#数据)
 4. [语句](#语句)
 5. [操作符和表达式](#操作符和表达式)
@@ -54,7 +54,7 @@ Self-taught embedded knowledge
 
 #### 1. 快速上手
 
-> 1.1 空白和注释  
+##### 1.1 空白和注释  
 
 ```c
 /* 注释1 */
@@ -74,7 +74,7 @@ Self-taught embedded knowledge
 ```
 逻辑上删除一段代码，使用`#if`指令。
 
-> 1.2 预处理指令
+##### 1.2 预处理指令
 
 ```c
 #include <stdio.h>
@@ -98,9 +98,10 @@ void rearrange( char *output, char const *input,
 
 关键字`void`表示函数不返回任何值，无返回值的函数被称为**过程（procedure）**。
 
+##### 1.3 `main`函数
+main函数，程序的起点
 
-
-
+#### 2. 基本概念
 ### C++
 (Related contents)
 ### Python
