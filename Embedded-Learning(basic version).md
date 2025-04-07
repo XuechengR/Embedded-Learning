@@ -6,7 +6,7 @@
 - [Interfaces & Protocols](#Interfaces-&-Protocols)      
 
 ## Programming Fundamentals  
-（相关内容）
+(Related contents)
 
 ## Programming Languages
 - [C](#C语言)  
@@ -14,35 +14,36 @@
 - [Python](#Python)    
 
 ### C
-> 学习图书《C和指针》
-（相关内容）
-### C++                                                                                                            
-（相关内容）
+学习图书《C和指针》
+(Related contents)
+### C++
+(Related contents)
 ### Python
-（相关内容）
+(Related contents)
 
 ## Operating Systems  
-- [操作系统基础](#操作系统基础)
-- [实时操作系统](#实时操作系统)
-- [嵌入式 Linux](#嵌入式-Linux)
+Operating System Fundamentals
+(Related contents)
+- [Real-Time OS](#Real-Time-OS)
+- [Embedded Linux](#Embedded-Linux)
 
-### 操作系统基础
-（相关内容）
-### 实时操作系统
-#### FreeRTOS
-### 嵌入式 Linux
-（相关内容）
+### Real-Time OS
+- #### FreeRTOS
+(Related contents)
+### Embedded Linux
+(Related contents)
 
-## Microcontrollers        
-- [GPIO](###GPIO)  
-- [ADC/DAC](###ADC/DAC)    
-- [Timers/Counters](###Timers/Counters)  
-- [PWM](###PWM)  
-- [Watchdog](###Watchdog)  
-- [Interrupts](###Interrupts)  
-- [DMA](###DMA)    
+## Microcontrollers
+(Related contents)
+- [GPIO](#GPIO)  
+- [ADC/DAC](#ADC/DAC)    
+- [Timers/Counters](#Timers/Counters)  
+- [PWM](#PWM)  
+- [Watchdog](#Watchdog)  
+- [Interrupts](#Interrupts)  
+- [DMA](#DMA)    
 - [Clock Management](#Clock-Management)  
-  
+
 ### GPIO  
 ### ADC/DAC    
 ### Timers/Counters    
@@ -51,15 +52,16 @@
 ### Interrupts  
 ### DMA    
 ### Clock Management      
-（相关内容）
 
-## Interfaces & Protocols  
-- [Basic](###Basic)
-- [High-Speed](###High-Speed)    
-- [Wireless](###Wireless)    
-- [Industrial](###Industrial)   
-- [Network](###Network) 
-- [Automotive](###Automotive)  
-- [cellular](###cellular)  
+
+## Interfaces & Protocols
+(Related contents)
+- [Basic](#Basic)
+- [High-Speed](#High-Speed)    
+- [Wireless](#Wireless)    
+- [Industrial](#Industrial)   
+- [Network](#Network) 
+- [Automotive](#Automotive)  
+- [cellular](#cellular)  
 ##
 
