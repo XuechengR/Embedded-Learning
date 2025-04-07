@@ -17,7 +17,8 @@ Self-taught embedded knowledge
 - [Memory Management](#memory-management)
 
 ### Algorithms & Data Structures
-学习书籍《[Hello 算法](#https://www.hello-algo.com/)》
+学习书籍《[Hello 算法](https://www.hello-algo.com/ "Hello 算法")》
+
 
 (Related contents)
 ### Design Patterns
