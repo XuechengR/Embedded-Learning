@@ -3,7 +3,7 @@ Self-taught embedded knowledge
 
 
 # Catalog
-- [Programming Fundamentals](#Programming-Fundamentals)
+- [Programming Fundamentals](#programming-fundamentals)
 - [Programming Languages](#Programming-Languages)
 - [Operating Systems](#Operating-Systems)
 - [Microcontrollers](#Microcontrollers)
