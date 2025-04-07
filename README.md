@@ -53,9 +53,43 @@ Self-taught embedded knowledge
 18. [运行时环境](#运行时环境)
 
 #### 1. 快速上手
-> 空白和注释
-> 
->> 注释（comment），注释以符号**/\***开始，以符号/*/
+
+> 1.1 空白和注释  
+
+```c
+/* 注释1 */
+  
+/* 
+** 注释2
+*/
+ 
+// 注释3
+```
+**注释**（comment），注释以符号`/*`开始，以符号`*/`结束，**注释不能嵌套**。
+
+```c
+#if 0
+    statements
+#endif 
+```
+逻辑上删除一段代码，使用`#if`指令。
+
+> 1.2 预处理指令
+
+```c
+#include <stdio.h>
+#define MAX_COL 20
+```
+预处理器用名叫`stdio.h`的库函数头文件的内容**替换**第一条`#include`指令语句。
+另外一条预处理指令`#define`，将名字`MAX_COl`定义为`20`。
+
+`MAX_COl`为字面值常量，**一般都大写**，在源代码中会被替换为定义的值。
+
+```c
+int read_column_num( int cols[], int max );
+void rearrange( char *output, char const *input,
+        int n_cols, int const cols[]);
+```
 
 ### C++
 (Related contents)
