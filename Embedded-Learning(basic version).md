@@ -36,8 +36,8 @@ Operating System Fundamentals
 ## Microcontrollers
 (Related contents)
 - [GPIO](#GPIO)  
-- [ADC/DAC](#ADC/DAC)    
-- [Timers/Counters](#Timers/Counters)  
+- [ADC/DAC](#ADCDAC)    
+- [Timers/Counters](#TimersCounters)  
 - [PWM](#PWM)  
 - [Watchdog](#Watchdog)  
 - [Interrupts](#Interrupts)  
