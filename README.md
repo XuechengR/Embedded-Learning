@@ -17,6 +17,8 @@ Self-taught embedded knowledge
 - [Memory Management](#memory-management)
 
 ### Algorithms & Data Structures
+学习书籍《[Hello 算法](#https://www.hello-algo.com/)》
+
 (Related contents)
 ### Design Patterns
 (Related contents)
@@ -31,7 +33,7 @@ Self-taught embedded knowledge
 - [Python](#python)
   
 ### C
-> 学习书籍《C和指针》（Pointers On C）
+学习书籍《C和指针》（Pointers On C）
 
 1. [快速上手](#1-快速上手)
 2. [基本概念](#2-基本概念)
@@ -91,34 +93,64 @@ int read_column_num( int cols[], int max );
 void rearrange( char *output, char const *input,
         int n_cols, int const cols[]);
 ```
-这些声明被成为**函数原型（function prototype）**，
-函数原型的参数不是必须的，参数名的目的是提示它们的作用。
+这些声明被成为**函数原型**（function prototype）。其中的参数名字不是必须的，参数名的目的是提示它们的作用。
 
-`rearrange`函数接收4个参数，第1个和第2个参数为**指针（pointer）**。
+`rearrange`函数接收4个参数，第1个和第2个参数为**指针**（pointer）。
 
-关键字`void`表示函数不返回任何值，无返回值的函数被称为**过程（procedure）**。
+关键字`void`表示函数不返回任何值，无返回值的函数被称为**过程**（procedure）。
 
-##### 1.3 `main`函数
-main函数，程序的起点
+##### 1.3 main函数
+==`main`函数，程序的起点。==
+
 
 #### 2. 基本概念
+> 组成一个程序的每个（或多个）源代码通过编译过程分别转换为**目标代码**（object code）。然后各个目标文件由**链接器**（linker）捆绑在一起，形成单一可执行程序。
+
+源代码 编译 &rarr; 目标代码 与函数库 链接 &rarr; 可执行文件
+
+> **预处理器**（preprocessor） &rarr; **解析**（parse）&rarr; **优化器**（optimizer）
+
+预处理器 &rarr; 执行文本操作，替换
+解析 &rarr; 产生绝大多数错误和警告
+优化 &rarr; 处理目标代码，使它效率更高
+
+==编译链接==
 
 #### 3. 数据
+##### 3.1 基本数据类型
+
+
+
 #### 4. 语句
+(Related contents)
 #### 5. 操作符和表达式
+(Related contents)
 #### 6. 指针
+(Related contents)
 #### 7. 函数
+(Related contents)
 #### 8. 数组
+(Related contents)
 #### 9. 字符串、字符和字节
+(Related contents)
 #### 10. 结构和联合
+(Related contents)
 #### 11. 动态内存分配
+(Related contents)
 #### 12. 使用结构和指针
+(Related contents)
 #### 13. 高级指针话题
+(Related contents)
 #### 14. 预处理器
+(Related contents)
 #### 15. 输入/输出函数
+(Related contents)
 #### 16. 标准函数库
+(Related contents)
 #### 17. 经典抽象数据类型
+(Related contents)
 #### 18. 运行时环境
+(Related contents)
 
 ### C++
 (Related contents)
