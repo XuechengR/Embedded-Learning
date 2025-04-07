@@ -81,6 +81,7 @@ Self-taught embedded knowledge
 #define MAX_COL 20
 ```
 预处理器用名叫`stdio.h`的库函数头文件的内容**替换**第一条`#include`指令语句。
+
 另外一条预处理指令`#define`，将名字`MAX_COl`定义为`20`。
 
 `MAX_COl`为字面值常量，**一般都大写**，在源代码中会被替换为定义的值。
@@ -90,6 +91,15 @@ int read_column_num( int cols[], int max );
 void rearrange( char *output, char const *input,
         int n_cols, int const cols[]);
 ```
+这些声明被成为**函数原型（function prototype）**，
+函数原型的参数不是必须的，参数名的目的是提示它们的作用。
+
+`rearrange`函数接收4个参数，第1个和第2个参数为**指针（pointer）**。
+
+关键字`void`表示函数不返回任何值，无返回值的函数被称为**过程（procedure）**。
+
+
+
 
 ### C++
 (Related contents)
