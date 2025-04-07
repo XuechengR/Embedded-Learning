@@ -1,12 +1,11 @@
 # Catalog
-- [Programming Fundamentals](#Programming-Fundamentals)          
-- [Programming Languages](#Programming-Languages)  
-- [Operating Systems](#Operating-Systems)      
-- [Microcontrollers](#Microcontrollers)              
+- [Programming Fundamentals](#Programming-Fundamentals)
+- [Programming Languages](#Programming-Languages)
+- [Operating Systems](#Operating-Systems)
+- [Microcontrollers](#Microcontrollers)
 - [Interfaces & Protocols](#Interfaces-&-Protocols)
-[Jump to Interfaces & Protocols](#interfaces-&-protocols)
 
-## Programming Fundamentals  
+## Programming Fundamentals
 (Related contents)
 
 ## Programming Languages
@@ -21,7 +20,6 @@
 (Related contents)
 ### Python
 (Related contents)
-## Interfaces & Protocols
 
 ## Operating Systems  
 Operating System Fundamentals
