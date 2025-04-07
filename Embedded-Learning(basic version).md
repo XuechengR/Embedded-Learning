@@ -3,13 +3,14 @@
 - [Programming Languages](#Programming-Languages)  
 - [Operating Systems](#Operating-Systems)      
 - [Microcontrollers](#Microcontrollers)              
-- [Interfaces & Protocols](#Interfaces-&-Protocols)      
+- [Interfaces & Protocols](#interfaces-&-protocols)
+
 
 ## Programming Fundamentals  
 (Related contents)
 
 ## Programming Languages
-- [==C==](#C语言)  
+- [C](#C)  
 - [C++](#C++)  
 - [Python](#Python)
   
@@ -73,9 +74,9 @@ Operating System Fundamentals
 
 ### Basic
 (Related contents)
-- ==UART==
-- ==I2C==
-- ==SPI==
+- UART
+- I2C
+- SPI
 ### High-Speed
 (Related contents)
 - Ethemet
