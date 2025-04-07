@@ -3,7 +3,7 @@
 - [Programming Languages](#Programming-Languages)  
 - [Operating Systems](#Operating-Systems)      
 - [Microcontrollers](#Microcontrollers)              
-- [Interfaces & Protocols](#interfaces-&-protocols)
+- [Interfaces & Protocols](#interfaces-&amp;-protocols)
 
 
 ## Programming Fundamentals  
