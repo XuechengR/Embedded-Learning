@@ -4,17 +4,17 @@ Self-taught embedded knowledge
 
 # Catalog
 - [Programming Fundamentals](#programming-fundamentals)
-- [Programming Languages](#Programming-Languages)
-- [Operating Systems](#Operating-Systems)
-- [Microcontrollers](#Microcontrollers)
-- [Interfaces & Protocols](#Interfaces--Protocols)
+- [Programming Languages](#programming-languages)
+- [Operating Systems](#operating-systems)
+- [Microcontrollers](#microcontrollers)
+- [Interfaces & Protocols](#interfaces--protocols)
 
 ## Programming Fundamentals
 (Related contents)
-- [Algorithms & Data Structures](#Algorithms--Data-Structures)
-- [Design Patterns](#Design-Patterns)
-- [State Machines](#State-Machines)
-- [Memory Management](#Memory-Management)
+- [Algorithms & Data Structures](#algorithms--data-structures)
+- [Design Patterns](#design-patterns)
+- [State Machines](#state-machines)
+- [Memory Management](#memory-management)
 
 ### Algorithms & Data Structures
 (Related contents)
@@ -26,9 +26,9 @@ Self-taught embedded knowledge
 (Related contents)
 
 ## Programming Languages
-- [C](#C)  
-- [C++](#C-1)  
-- [Python](#Python)
+- [C](#c)  
+- [C++](#c-1)  
+- [Python](#python)
   
 ### C
 (Related contents)
@@ -40,12 +40,12 @@ Self-taught embedded knowledge
 ## Operating Systems  
 Operating System Fundamentals
 (Related contents)
-- [Real-Time OS](#Real-Time-OS)
-- [Embedded Linux](#Embedded-Linux)
+- [Real-Time OS](#real-time-os)
+- [Embedded Linux](#embedded-linux)
 
 ### Real-Time OS
 (Related contents)
-- [FreeRTOS](#FreeRTOS)
+- [FreeRTOS](#freertos)
 #### FreeRTOS
 (Related contents)
 
@@ -54,14 +54,14 @@ Operating System Fundamentals
 
 ## Microcontrollers
 (Related contents)
-- [GPIO](#GPIO)  
-- [ADC/DAC](#ADCDAC)    
-- [Timers/Counters](#TimersCounters)  
-- [PWM](#PWM)  
-- [Watchdog](#Watchdog)  
-- [Interrupts](#Interrupts)  
-- [DMA](#DMA)    
-- [Clock Management](#Clock-Management)  
+- [GPIO](#gpio)  
+- [ADC/DAC](#adcdac)    
+- [Timers/Counters](#timerscounters)  
+- [PWM](#pwm)  
+- [Watchdog](#watchdog)  
+- [Interrupts](#interrupts)  
+- [DMA](#dma)    
+- [Clock Management](#clock-management)  
 
 ### GPIO
 (Related contents)
@@ -82,19 +82,19 @@ Operating System Fundamentals
 
 ## Interfaces & Protocols
 (Related contents)
-- [Basic](#Basic)
-- [High-Speed](#High-Speed)    
-- [Wireless](#Wireless)    
-- [Industrial](#Industrial)   
-- [Network](#Network) 
-- [Automotive](#Automotive)  
+- [Basic](#basic)
+- [High-Speed](#high-speed)    
+- [Wireless](#wireless)    
+- [Industrial](#industrial)   
+- [Network](#network) 
+- [Automotive](#automotive)  
 - [cellular](#cellular)  
 
 ### Basic
 (Related contents)
-- [UART](#UART)
-- [I2C](#I2C)
-- [SPI](#SPI)
+- [UART](#uart)
+- [I2C](#i2c)
+- [SPI](#spi)
 
 #### UART
 (Related contents)
@@ -105,8 +105,8 @@ Operating System Fundamentals
 
 ### High-Speed
 (Related contents)
-- [Ethemet](#Ethemet)
-- [USB](#USB)
+- [Ethemet](#ethemet)
+- [USB](#usb)
 
 #### Ethemet
 (Related contents)
@@ -115,13 +115,13 @@ Operating System Fundamentals
 
 ### Wireless
 (Related contents)
-- [BuleTooth](#BuleTooth)
-- [Wi-Fi](#Wi-Fi)
-- [LoRa](#LoRa)
-- [Zigbee](#Zigbee)
-- [Thread](#Thread)
-- [Matter](#Matter)
-- [UWB](#UWB)
+- [BuleTooth](#buletooth)
+- [Wi-Fi](#wi-fi)
+- [LoRa](#lora)
+- [Zigbee](#zigbee)
+- [Thread](#thread)
+- [Matter](#matter)
+- [UWB](#uwb)
 
 #### BuleTooth
 (Related contents)
@@ -143,8 +143,8 @@ Operating System Fundamentals
 
 ### Network
 (Related contents)
-- [TCP/IP](#TCPIP)
-- [UDP](#UDP)
+- [TCP/IP](#tcpip)
+- [UDP](#udp)
 
 #### TCP/IP
 (Related contents)
@@ -153,10 +153,10 @@ Operating System Fundamentals
 
 ### Automotive
 (Related contents)
-- [CAN](#CAN)
-- [LIN](#LIN)
-- [MOST](#MOST)
-- [FlexRay](#FlexRay)
+- [CAN](#can)
+- [LIN](#lin)
+- [MOST](#most)
+- [FlexRay](#flexray)
 
 #### CAN
 (Related contents)
@@ -169,9 +169,9 @@ Operating System Fundamentals
 
 ### cellular
 (Related contents)
-- [GSM/LTE](#GSMLTE)
-- [LTE-M/5G](#LTE-M5G)
-- [NB-loT](#NB-loT)
+- [GSM/LTE](#gsmlte)
+- [LTE-M/5G](#lte-m5g)
+- [NB-loT](#nb-lot)
 
 #### GSM/LTE
 (Related contents)
