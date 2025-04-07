@@ -3,11 +3,11 @@ Self-taught embedded knowledge
 
 
 # Catalog
-- [Programming Fundamentals](#programming-fundamentals)
-- [Programming Languages](#programming-languages)
-- [Operating Systems](#operating-systems)
-- [Microcontrollers](#microcontrollers)
-- [Interfaces & Protocols](#interfaces--protocols)
+- [Programming Fundamentals](programming-fundamentals)
+- [Programming Languages](programming-languages)
+- [Operating Systems](operating-systems)
+- [Microcontrollers](microcontrollers)
+- [Interfaces & Protocols](interfaces--protocols)
 
 ## Programming Fundamentals
 (Related contents)
