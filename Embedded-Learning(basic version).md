@@ -5,7 +5,22 @@
 - [Microcontrollers](#Microcontrollers)
 - [Interfaces & Protocols](#Interfaces--Protocols)
 
+(Related contents)
+
 ## Programming Fundamentals
+(Related contents)
+- [Algorithms & Data Structures](#Algorithms--Data-Structures)
+- [Design Patterns](#Design-Patterns)
+- [State Machines](#State-Machines)
+- [Memory Management](#Memory-Management)
+
+### Algorithms & Data Structures
+(Related contents)
+### Design Patterns
+(Related contents)
+### State Machines
+(Related contents)
+### Memory Management
 (Related contents)
 
 ## Programming Languages
