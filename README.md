@@ -278,7 +278,37 @@ void rearrange( char *output, char const *input,
 ==编译链接==
 
 #### 3. 数据
+
 ##### 3.1 基本数据类型
+
+- **整型**包括，字符，短整型，整型，长整型，都分**有符号**（singed）**和无符号**（unsigned）。
+  长整型至少应该和整型一样长，而整型至少应该和短整型一样长。
+
+- **字面值**（literal）等价于字面值常量，不允许发生改变。命名常量，声明为`const`的变量。
+  在整型字面值后面添加字符`L`和`l`，可以使这个整数被解释为`long`整型值。
+  字符`U`或`u`则用于把数值指定为`unsigned`整型值。`UL`则为`unsigned long`整型值。
+
+- **字符常量**：`'R'`，宽字符常量（wide character literal）：`L'R'`。
+
+- **枚举**（enumerated）类型就是指它的值为符号常量而不是字面值类型。
+  默认`CPU`是`0`，`PINT`是`1`，以此类推，未指定则它的值比前一个符号名的值大1。
+```c
+/* 声明一个类型，称为Jar_Type */
+enum Jar_Type { CPU, PINT, QUART, HALF_GALLON, GALLON };  //类型名为Jar_Type
+/* 声明这种类型的变量 */
+enum Jar_Type milk_jug, gas_can, medicine_bottle;
+/* 一步到位 */
+enum { CPU, PINT, QUART, HALF_GALLON, GALLON }
+    milk_jug, gas_can, medicine_bottle;
+/* 初始化 */
+enum Jar_Type { CPU = 8, PINT = 16, QUART = 32,
+        HALF_GALLON = 64, GALLON = 128 }; 
+```
+
+- **浮点数**包括`float`、`double`、`long double`类型。
+  字面值缺省的情况下都为double类型
+
+
 
 
 
