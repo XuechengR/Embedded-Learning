@@ -55,12 +55,12 @@ Self-taught embedded knowledge
 它描述了随着输入数据大小的增加，算法执行所需时间和空间的增长**趋势**。
 
 **时间复杂度**（time complexity）：用于衡量算法运行时间随数据量增长的趋势。
-> $O(1) < O(\log n) < O(n) < O(n \log n) < O(n^2) < O(2^n) < O(n!)$
+> $O(1) < O(\log n) < O(n) < O(n \log n) < O(n^2) < O(2^n) < O(n!)$  
 > 常数阶 &lt; 对数阶 &lt; 线性阶 &lt; 线性对数阶 &lt; 平方阶 &lt; 指数阶 &lt; 阶乘阶
 
 **空间复杂度**（space complexity）用于衡量算法占用内存空间随数据量增长的趋势。
-> $O(1) < O(\log n) < O(n) < O(n \log n) < O(n^2) < O(2^n)$
-> 常数阶 &lt; 对数阶 &lt; 线性阶 &lt; 平方阶 &lt; 指数阶
+> $O(1) < O(\log n) < O(n) < O(n \log n) < O(n^2) < O(2^n)$  
+> 常数阶 &lt; 对数阶 &lt; 线性阶 &lt; 平方阶 &lt; 指数阶  
 > **通常只关注最差空间复杂度**
 
 #### 3. 数据结构
