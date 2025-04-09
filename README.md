@@ -341,20 +341,47 @@ int * const ptr;  //指针是常量，它的值无法修改，但可以修改它
 ```
 
 ##### 3.3 作用域
-文件作用域，函数作用域，代码块作用域，原型作用域
 
+作用域是指变量、函数或对象在程序中可以被访问的范围。
+
+1. 文件作用域
+3. 函数作用域
+4. 代码块作用域
+5. 原型作用域
+  
 ##### 3.4 链接属性
-external（外部），internal（内部），none(无)
-- external：不论声明多少次，位于几个源文件都表示同一个实体。
-- internal：在同一个源文件内的所有声明中都指向同一个实体，但位于不同源文件的多个声明则分属不同的实体。
-- none：总是被当作单独的个体，多个声明被当作不同的独立实体。
+
+链接属性描述了在程序的不同部分（例如不同的源文件）中，标识符（如变量或函数）如何关联和共享的特性。
+
+1. external（外部链接）
+不论声明多少次，位于几个源文件都表示同一个实体。
+
+3. internal（内部链接）
+在同一个源文件内的所有声明中都指向同一个实体，但位于不同源文件的多个声明则分属不同的实体。
+
+5. none（无链接）
+总是被当作单独的个体，多个声明被当作不同的独立实体。
 ```c
 /* 被源文件私有 */
 static int b;
 /* 函数声明为static，防止它被其他源文件调用 */
 static int c( int d ){}
 ```
-`extern`和`static`
+> `extern`关键字只能用于源文件的标识符的第 1 次声明，后续声明不改变其链接属性。
+> `static`关键字只对缺省链接属性为 external 的声明才有改变链接属性的效果。
+全局变量和未使用`static`关键字修饰的函数默认具有外部链接属性，可被其他文件通过`extern`关键字引用。
+
+##### 3.5 存储类型
+
+- **静态变量**（`static`）：代码块之外声明的变量，存储在静态内存中，在整个程序执行过程中一直存在，不允许从其他文件访问。
+- **自动变量**（`auto`）：代码块内部声明的变量，缺省存储类型为`auto`，存储在堆栈中，作用域整个代码块（声明为`static`变量后，不存储于堆栈中，值在程序整个执行期一直保持，存储类型从自动变为静态）。
+- 关键字`register`可以用于自动变量的声明，存储于机器的硬件寄存器，**寄存器变量**。
+- 形式参数，声明在函数头部，存于堆栈中，作用域整个函数，不允许声明为`static`。
+
+> `static`关键字
+> 用于函数定义，或代码块之外的变量声明，`static`只改变链接属性。
+> 用于代码块内的变量声明，只改变存储类型，不改变链接属性和作用域。
+
 #### 4. 语句
 (Related contents)
 #### 5. 操作符和表达式
@@ -399,41 +426,12 @@ Operating System Fundamentals
 
 ### Real-Time OS
 (Related contents)
-> “提供超越商业替代品用户所要求的质量和服务的免费产品”
 
-15 多年来，FreeRTOS 专职开发人员一直与全球 顶尖的芯片公司紧密合作， 为客户提供[市场领先![external_link](https://www.freertos.org/svg/external_link.svg)](https://www.embedded.com/electronics-blogs/embedded-market-surveys/4458724/2017-Embedded-Market-Survey)以及 完全免费的商用级、[高品质](https://www.freertos.org/Documentation/02-Kernel/06-Coding-guidelines/02-FreeRTOS-Coding-Standard-and-Style-Guide) **RTOS**和工具……但 什么是 RTOS？
-
-此页面首先介绍了操作系统的定义，接着具体定义了 [实时操作系统](https://www.freertos.org/Documentation/02-Kernel/01-About-the-FreeRTOS-kernel/01-FreeRTOS-kernel)，然后 更进一步定义了实时定时器内核（或实时执行器）。
-
-另请参阅常见问题项目“[为什么用 RTOS](https://www.freertos.org/Why-FreeRTOS/FAQs/What-is-this-all-about#why-use-an-rtos)” ，了解有关在什么情况使用和为什么 在嵌入式系统软件设计中使用 RTOS 会有帮助。
-
-## [](https://www.freertos.org/zh-cn-cmn-s/Why-FreeRTOS/What-is-FreeRTOS#%E4%BB%80%E4%B9%88%E6%98%AF%E9%80%9A%E7%94%A8%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F)什么是通用操作系统？
-
-操作系统是支持计算机基本功能的计算机程序， 为在计算机上运行的程序（或_应用程序_）提供服务。应用程序提供计算机用户 想要或需要的功能。操作系统提供的服务使得应用程序写入更快、更简单、 并且更易于维护。如果您正在阅读此网页，说明您正在使用网络浏览器（提供您感兴趣的功能的应用程序 ），该浏览器本身会在操作系统提供的环境中运行 。
-
-## [](https://www.freertos.org/zh-cn-cmn-s/Why-FreeRTOS/What-is-FreeRTOS#%E4%BB%80%E4%B9%88%E6%98%AF-rtos)什么是 RTOS？
-
-大多数操作系统似乎能同时执行多个程序。这称为多任务处理。实际上， 每个处理器内核在任何给定时间点都只能运行一个执行线程。操作系统中 一个名为调度器的部分负责决定何时运行哪个程序， 并通过在每个程序之间快速切换以造成同时执行的假象。
-
-操作系统的类型取决于调度器如何决定何时运行哪个程序。例如， 多用户操作系统（如 Unix）中使用的调度器将确保每个用户都能获得合理的处理时间 。再比如，桌面操作系统（如 Windows）中的调度器会努力确保计算机对用户作出响应。 （**注意：FreeRTOS 并非大型操作系统，也不是为在台式 计算机级处理器上运行而设计的，我使用这些例子纯粹是因为它们是读者熟悉的系统。**）
-
-实时操作系统中的调度器旨在提供 可预测的（通常描述为 _确定性_）执行模式。这对嵌入式系统而言意义重大，因为嵌入式系统 经常有实时要求。实时要求是指定嵌入式系统 必须在严格定义的时间内（_截止时间_）响应某个事件。只有当操作系统调度器的行为 可以预测（因此具有确定性）时， 才能保证满足实时要求。
-
-传统的小型实时调度器（如 [FreeRTOS](https://www.freertos.org/Documentation/02-Kernel/02-Kernel-features/01-Tasks-and-co-routines/04-Task-scheduling) 中使用的调度器） 通过允许用户为每个执行线程分配优先级来实现确定性。然后，调度器根据优先级来判断 下一个要运行的执行线程。在 FreeRTOS 中，执行线程称为 _任务_。
-
-## [](https://www.freertos.org/zh-cn-cmn-s/Why-FreeRTOS/What-is-FreeRTOS#%E4%BB%80%E4%B9%88%E6%98%AF-freertos)什么是 FreeRTOS？
-
-(另请参阅“[有关 FreeRTOS](https://www.freertos.org/Documentation/02-Kernel/01-About-the-FreeRTOS-kernel/01-FreeRTOS-kernel) 的更多信息”)
-
-FreeRTOS 是 RTOS 的一个类别，设计得足够小，可以在微控制器上运行， 但其用途并不局限于微控制器应用程序。
-
-微控制器是一种小型且资源有限的处理器， 在单个芯片上集成了处理器本身、 用于保存待执行程序的只读存储器（ROM 或闪存） 以及执行程序所需的随机存取存储器（RAM） 。通常情况下，程序是 直接从只读存储器中执行的。
-
-微控制器通常用于深度嵌入式应用中（在这些应用中， 实际上看不到处理器本身，也看不到它们运行的软件）， 它们通常有非常具体和专门的工作要做。由于大小限制和专用终端应用的性质，很少有理由使用完整的 RTOS 实现， 或者说，使用完整的 RTOS 实现是不可能的。因此，FreeRTOS 只提供核心的实时调度功能、 任务间通信、定时和同步原语。这意味着 将它描述为实时内核或实时执行器更准确。其他功能，如命令控制台 接口或网络堆栈，可通过附加组件实现。
 - [FreeRTOS](#freertos)
-#### FreeRTOS
-[](https://www.freertos.org/zh-cn-cmn-s "https://www.freertos.org/zh-cn-cmn-s")学习官网内容。
 
+#### FreeRTOS
+
+学习[FreeRTOS官网](https://www.freertos.org/zh-cn-cmn-s "https://www.freertos.org/zh-cn-cmn-s")内容。
 
 
 (Related contents)
