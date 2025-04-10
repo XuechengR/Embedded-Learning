@@ -596,15 +596,150 @@ function_name()  // 最简单的函数
 }
 ```
 C函数的所有参数均以“传值调用”方式进行传递，这意味着函数将获得参数值的一份拷贝。
-数组如果传递的是数组名，则为“传址调用”
+数组如果传递的是数组名，则为“传址调用”。
 
-(Related contents)
+抽象数据类型（ADT，Abstract Data Type），或称黑盒，由接口和实现组成。
 
+递归函数：直接或间接调用自身地函数。
+尾部递归：递归调用是函数执行的最后一项任务。
 
+常见的原型使用方法是把原型放在一个单独文件。
+
+可变参数列表：参数的可变列表位于一个和多个普通参数（命名参数）的后面，在函数原型中以一个省略号表示。
 
 #### 8. 数组
-(Related contents)
+
+##### 8.1 一维数组
+
+```c
+int a[10];
+int b[10];
+b = a;
+// 非法
+// 不能使用赋值符把一个数组的所有元素复制到另一个数组。只能使用循环，每次复制一个元素。
+```
+
+```c
+/* 下标引用 */
+int array[10];
+int *ap = array + 2;
+
+ap = &array[2];
+ap = array + 2;
+
+*ap = array[2] = *(array + 2);
+
+ap + 6 = &array[8] = array + 8;
+*ap + 6 = array[2] + 6;
+*(ap + 6) = array[8] = *(array + 8) = ap[6];
+
+array[0] = *(array + (0));
+ap[0] = *(ap + 0) = *ap; // 也可
+ap[-1] = array[1]; // 要防止越界
+```
+指针比下标更有效率的场合：在数组中固定移动时，指针效率更高。
+```c
+/* 初始化字符数组*/
+char message[] = "Hello";
+```
+
+##### 8.2 多维数组
+
+- 下标与指针
+```c
+int array[3];
+int matrix[3][10]; // 矩阵
+/* 
+** 数组名 matrix 的值是一个指向它第一个元素的指针
+** 所以 matrix 是一个指向一个包含10个整型元素的的指针
+*/
+
+matrix + 1 = &matrix[1];
+*(matrix + 1) = matrix[1];
+
+*(matrix + 1) + 5 = &matrix[1][5];
+*(*(matrix + 1) + 5) = matrix[1][5];
+
+int (*p)[10]; // 指向二维整型数组的指针
+int (*p)[] = matrix;
+```
+- 作为函数参数的数组
+```c
+// 一维数组
+void func1( int *vec );
+void func1( int vec[] );
+int vector[10];
+func1(vector);
+
+//二维数组
+void func2( int (*mat)[10] );
+void func2( int mat[][10] );
+int martix[3][10];
+func2(matrix);
+```
+- 初始化
+```c
+int matrix[2][3] = { 100, 101, 102, 110, 111, 112 };
+int matrix[2][3] = {
+    {100, 101, 102}, 
+    {110, 111, 112}
+};
+```
+在多维数组在，只有第一维才能根据初始化列表缺省地提供。
+
+- 指针数组
+```c
+int *api[10]; // api是个数组，有10个元素，元素类型为指向整型地指针
+```
+> 在绝大多数表达式中，数组名的值是指向数组第一个元素的指针
+> 1. `sizeof`返回整个数组所占的字节，而不是一个指针所占的字节
+> 2. 单目操作符`&`返回一个指向数组的指针
+
 #### 9. 字符串、字符和字节
+
+字符串就是一串零个或多个字符，并且以一个位模式为全 0 的`NUL`字节结尾。
+头文件`string.h`包含字符串函数所需的原型和声明。
+```c
+/* 字符串的长度是其所包含的字符个数 */
+size_t strlen( char const *string ); // 库函数 strlen 原型
+// size_t 无符号整数类型，在 stddef.h 中定义
+```
+- 复制字符串
+```c
+/* 把 src 字符串复制到 dst */
+char *strcpy( char *dst, char const *src );
+// 若 src 和 dst 在内存中重叠，结果未定义
+```
+- 连接字符串
+```c
+/* 把 src 字符串的副本添加到 dst 字符串末尾 */
+char *strcat( char *dst, char const *src );
+// 若 src 和 dst 的位置发生重叠，结果未定义
+```
+**复制**字符串和**连接**字符串都返回第一个参数的副本，即一个指向目标字符数组的指针。
+
+- 字符串比较
+```c
+/* 
+** 如果s1小于s2，则函数返回一个小于零的值；
+** 如果s1大于s2，则函数返回一个大于零的值；
+** 如果s1等于s2，则函数返回零。
+*/
+int strcmp( char const *s1, char const *s2 ); // 相当于 return s1 - s2
+```
+- 长度受限的字符串函数
+函数接受一个显示的长度参数，用于限定复制或比较的字符串
+```c
+/*  */
+char *strncpy( char *dst, char const *src, size_t len );
+char *strncat( char *dst, char const *src, size_t len );
+// 从 src 向 dst 写入 len 个字符，当 strlen(src) 小于 len，
+char strncmp( char const *s1, char const *s2, size_t len );
+```
+- 连接字符串
+```c
+
+```
 (Related contents)
 #### 10. 结构和联合
 (Related contents)
