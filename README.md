@@ -730,18 +730,72 @@ int strcmp( char const *s1, char const *s2 ); // 相当于 return s1 - s2
 - 长度受限的字符串函数
 函数接受一个显示的长度参数，用于限定复制或比较的字符串
 ```c
-/*  */
+/*
+** 向 dst 写入 len 个字符
+** 如果 strlen(src) 的值小于 len，则 dst 数组用额外的 NUL 字节填充到 len 长度
+** 如果 strlen(src) 的值大于 len，只复制 len 个字符，且不会自动追加 NUL 字节
+*/
 char *strncpy( char *dst, char const *src, size_t len );
+
+/*
+** 最多向目标数组复制 len 个字符（再加一个结尾的 NUL 字节）
+** 不管剩余空间是否够
+*/
 char *strncat( char *dst, char const *src, size_t len );
-// 从 src 向 dst 写入 len 个字符，当 strlen(src) 小于 len，
+
+/* 最多比较 len 个字节 */
 char strncmp( char const *s1, char const *s2, size_t len );
 ```
-- 连接字符串
+- 查找字符串
+1. 查找一个字符
+   在一个字符串中查找一个特定字符
+```c
+/*
+** strchr 在字符串 str 中查找字符 ch 第一次出现的位置 
+** 找到后返回一个指向该位置的指针，未找到返回 NULL 指针
+*/
+char *strchr( char const *str, int ch ); // 第二个参数为整型值
+
+/* strrchr 功能与 strchr 基本一致，返回的是ch字符最后一次出现的位置 */
+char *strrchr( char const *str, int ch );
+```
+2. ==查找任何几个字符==
+   查找任何一组字符第一次在字符串出现的位置
+```c
+/*
+** 
+** 
+*/
+char *strpbrk( char const *str, char const *group );
+```
+3. 查找一个字串
 ```c
 
+
 ```
-(Related contents)
+4. 查找一个字符串前缀
+```c
+
+
+```
+5. 查找标记
+```c
+
+
+```
+- 错误信息
+- 字符操作
+- 内存操作
+
 #### 10. 结构和联合
+
+使用结构可以把不同类型的值存储在一起
+
+聚合数据类型（）
+
+
+
+
 (Related contents)
 #### 11. 动态内存分配
 (Related contents)
