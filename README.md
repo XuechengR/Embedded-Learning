@@ -1,13 +1,15 @@
 # Embedded-Learning
-Self-taught embedded knowledge
+Self-learning Embedded Knowledge (Beginner Edition)
 
+Based on the following repositories.
+[GitHub - m3y54m/Embedded-Engineering-Roadmap](https://github.com/m3y54m/Embedded-Engineering-Roadmap "https://github.com/m3y54m/Embedded-Engineering-Roadmap")
 
 # Catalog
-- [Programming Fundamentals](#programming-fundamentals)
-- [Programming Languages](#programming-languages)
-- [Operating Systems](#operating-systems)
-- [Microcontrollers](#microcontrollers)
-- [Interfaces & Protocols](#interfaces--protocols)
+- [Programming Fundamentals（编程基础）](#programming-fundamentals)
+- [Programming Languages（编程语言）](#programming-languages)
+- [Operating Systems（操作系统）](#operating-systems)
+- [Microcontrollers（微控制器）](#microcontrollers)
+- [Interfaces & Protocols（接口与协议）](#interfaces--protocols)
 
 ## Programming Fundamentals
 (Related contents)
@@ -517,7 +519,7 @@ a = a + (expression);
 
   `expression1, expression2, ... , expressionN`：对每个表达式自左向右逐个求值，整个逗号 表达式的值就是最后那个表达式的值。
 
-- 优先级
+- ##### 优先级
 
   优先级由高到低排序。
 优先级只对相邻的操作符的执行顺序起作用。
@@ -789,9 +791,165 @@ char *strpbrk( char const *str, char const *group );
 
 #### 10. 结构和联合
 
-使用结构可以把不同类型的值存储在一起
+[结构声明](#结构声明)
+[结构用法](#结构用法)
+[结构自引用](#结构自引用)
+[不完整声明](#不完整声明)
+[结构的初始化](#结构的初始化)
+[结构、指针和成员](#结构、指针和成员)
 
-聚合数据类型（）
+
+
+聚合数据类型（aggregate data type）：能够同时存储一个以上的单独数据。
+C提供两种类型的聚合数据类型：数组和结构。
+
+结构是一些值的集合，这些值称为它的成员（member），但一个结构的各个成员可能具有不同的类型。使用结构可以把不同类型的值存储在一起。
+
+结构变量属于标量类型。
+
+- ##### 结构声明
+```c
+struct tag {        // 标签tag
+    member-list     // 成员：类型+名
+} varisble-list;    // 变量名
+```
+标签不同，相同的成员列表，为截然不同的数据类型，`z = &x;` 是非法的。
+```c
+struct {
+    int a;
+    char b;
+    float c;
+} x; 
+/* 声明一个名为 x 的变量，它包含3个成员：a、b、c */
+
+struct {
+    int a;
+    char b;
+    float c;
+} y[20], *z;
+/*
+** 这个声明创建了 y 和 z。
+** y是一个数组，它包含20个结构。
+** z是一个指针，它指向这个类型的结构
+*/
+
+z = &x;
+```
+- ##### 结构用法
+```c
+/* 正常用法 */
+struct SIMPLE {
+    int a;
+    char b;
+    float c;
+}; // 未创建任何变量
+struct SIMPLE x; // 声明变量
+struct SIMPLE y[20], *z;
+
+/* 常见用法 这个技巧和声明一个结构标签的效果几乎相同 */
+typedef struct { // typedef创建一种新的类型
+    int a;
+    char b;
+    float c;
+} Simple; // Simple是类型名
+Simple x;
+Simple y[20], *z;
+```
+- ##### 结构成员
+  一个结构的成员的名字可以和其他结构的成员的名字相同。
+
+1. 直接访问
+结构变量的成员是通过点操作符（.）访问的。
+```c
+sturct COMPLEX {
+    float f;
+    int a[20];
+    long *lp;
+    struct SIMPLE s;
+    struct SIMPLE sa[10];
+    struct SIMPLE *sp;
+};
+struct COMPLEX comp;
+
+/* 访问 */
+// 下标引用和点操作符具有相同优先级，结合性从左到右
+// (comp.s).a 简化为 comp.s.a
+// ( (comp.a)[4] ).c 简化为 comp.a[4].c 
+```
+2. 间接访问
+拥有指向结构的指针，可通过对指针执行间接访问操作符，获得结构。
+```c
+void func( struct COMPLEX *cp );
+
+(*cp).f // 访问这个变量所指向的结构的成员f
+cp->f // 同上
+```
+- ##### 结构自引用
+  一个结构内部包含一个**指向该结构本身的指针**，它事实上所**指向**的是**同一种类型的不同结构**。
+1. 正确用法
+```c
+struct SELF_REF1 {
+    int a;
+    struct SELF_REF1 *b;
+    int c;
+};
+```
+2. 陷阱 1
+```c
+// 成员 b 是一个完整的结构，其内部还将包含它自己的成员 b，重复永无止境。
+struct SELF_REF2 {
+    int a;
+    struct SELF_REF2 b;
+    int c;
+};
+```
+3. 陷阱 2
+```c
+// 这个声明的目的为这个结构创建类型名 SELF_REF3，类型名直到声明的末尾才定义。
+// 所以在结构声明的内部它尚未定义。
+typedef struct {
+    int a;
+    struct SELF_REF3 *b;
+    int c;
+} SELF_REF3;
+
+// 解决方案是定义一个结构标签来声明 b。
+typedef struct SELF_REF3_TAG {
+    int a;
+    struct SELF_REF3_TAG *b;
+    int c;
+} SELF_REF3;
+```
+- ##### 不完整声明（incomplete declaration）
+  在 A 的成员列表中需要标签 B 的不完整声明，一旦 A 被声明之后，B 的成员列表也可以被声明。
+```c
+struct B;
+struct A {
+    struct B *partner;
+};
+struct B {
+    struct A *partner;
+};
+```
+- ##### 结构的初始化
+```c
+struct INIT_EX {
+    inr a;
+    short b[10];
+    Simple c;
+} x = {
+    10,
+    { 1, 2, 3, 4, 5 },
+    { 25, 'x', 1.9 }
+};
+```
+- ##### 结构、指针和成员
+  
+
+
+
+
+
 
 
 
