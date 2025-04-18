@@ -5,11 +5,11 @@ Based on the following repositories.
 [GitHub - m3y54m/Embedded-Engineering-Roadmap](https://github.com/m3y54m/Embedded-Engineering-Roadmap "https://github.com/m3y54m/Embedded-Engineering-Roadmap")
 
 # Catalog
-- [Programming Fundamentals（编程基础）](#programming-fundamentals)
-- [Programming Languages（编程语言）](#programming-languages)
-- [Operating Systems（操作系统）](#operating-systems)
-- [Microcontrollers（微控制器）](#microcontrollers)
-- [Interfaces & Protocols（接口与协议）](#interfaces--protocols)
+- [Programming Fundamentals](#programming-fundamentals)
+- [Programming Languages](#programming-languages)
+- [Operating Systems](#operating-systems)
+- [Microcontrollers](#microcontrollers)
+- [Interfaces & Protocols](#interfaces--protocols)
 
 ## Programming Fundamentals
 (Related contents)
@@ -791,12 +791,16 @@ char *strpbrk( char const *str, char const *group );
 
 #### 10. 结构和联合
 
+1. ##### 结构基础知识
+
 [结构声明](#结构声明)
 [结构用法](#结构用法)
+[结构成员](#结构成员)
 [结构自引用](#结构自引用)
 [不完整声明](#不完整声明)
 [结构的初始化](#结构的初始化)
-[结构、指针和成员](#结构、指针和成员)
+
+2. ##### 结构、指针和成员
 
 
 
@@ -944,33 +948,241 @@ struct INIT_EX {
 };
 ```
 - ##### 结构、指针和成员
-  
+  直接或通过指针访问结构
 
+- ##### 结构的存储分配
+  编译器按照成员列表的顺序一个接一个地给每个成员分配内存。
 
+  只有当存储成员时需要满足正确的边界对齐要求时，成员之间才可能出现用于填充地额外内存空间。
 
+> 减少因边界对齐而造成的内存损失
+> 可以使用`offsetof`宏（定义于`stddef.h`）
+> `offsetof( type, member )`
+> `type`是结构的类型，`member`是成员名，表达式的结果是`size_t`值
+> 表示这个指定成员开始存储的位置距离结构开始存储的位置偏移几个字节。
 
+C语言的参数传值调用方式要求把参数的一份副本传递给函数，这样效率低。
+传递给函数一个指向结构的指针，指针比结构小得多，把它压到堆栈上效率能提高很多。
 
+- ##### 位段（bit field）
 
+  位段的声明和结构类似，但它的成员是一个或多个位的字段
 
+> 位段成员必须声明为`int`、`signed int`或`unsigned int`类型
+> 在成员名后是一个冒号和一个整数，这个整数指定该位段所占用的位的数目
+```c
+struct CHAR {
+    unsigned ch   : 7;
+    unsigned font : 6;
+    unsigned size : 19;
+};
+struct CHAR ch1;
+```
 
+- ##### 联合（union）
 
-(Related contents)
+  联合的所有成员引用的是内存的相同位置，在不同时刻把不同的东西存储在同一位置。
+```c
+union {
+    float f;
+    int i;
+} fi;
+```
+联合变量可以被初始化，但这个初始值必须是联合第一个成员的类型，而且它必须位于一对花括号里面。
+```c
+union {
+    int a;
+    float b;
+    char c[4];
+} x = { 5 };
+```
+
 #### 11. 动态内存分配
-(Related contents)
+
+- ##### malloc 和 free
+C 函数库提供了`malloc`和`free`两个函数，分别用于执行动态内存分配和释放。
+`malloc`从内存池中提取一块合适的内存，并向该程序返回一个指向这块内存的指针。
+当一块以前分配的内存不再使用时，程序调用`free`函数把它归还给内存池供以后之需。
+```c
+/* 函数原型 */
+void *malloc( size_t size ); // size_t，无符号类型，定义于 stdlib.h
+void free( void *pointer );
+```
+`malloc`的参数是需要分配的内存字节数，且分配的是连续的内存。
+如果内存池可以满足需求，则`malloc`返回一个指向被分配的内存块起始位置的指针。
+如果内存池无法满足需求，则返回一个`NULL`指针。
+
+`free`的参数必须要么是`NULL`，要么是一个先前从`malloc`、`calloc`或`realloc`返回的值。
+标准表示一个`void *`类型的指针可以转换为其他任何类型的指针。
+
+- ##### calloc 和 realloc
+```c
+void *calloc( size_t num_elements, size_t element_size );
+void realloc( void *ptr, size_t new_size );
+```
+
 #### 12. 使用结构和指针
-(Related contents)
+
+- ##### 链表
+- ##### 单链表
+- ##### 双链表
+
+
 #### 13. 高级指针话题
-(Related contents)
+
+- ##### 指向指针的指针
+```c
+int i;
+int *pi;
+int **ppi;
+ppi = &pi; // 把 ppi 初始化为指向变量 pi
+*ppi = &i; // 把 pi（通过 ppi 间接访问）初始化为指向变量 i
+/* 下面各语句具有相同效果 */
+i = 'a';
+*pi = 'a';
+**ppi = 'a';
+```
+- ##### 高级声明
+```c
+int *g; // 一个指向整型的指针，把表达式 *g 声明为一个整数
+int f;  // 一个整型变量
+/* 上下声明等价 */
+int *g, f; // 并没有声明两个指针
+
+int *f();    // f 是一个函数，它的返回值类型是一个指向整型的指针
+int (*f)();  // f 是一个函数指针，它所指向的函数返回一个整型值
+int *(*f)(); // f 是一个函数指针，它所指向的函数返回一个整型指针
+
+int f[];  // f 是一个数组，它的元素类型是整型，即为整型数组
+int *f[]; // f 是一个数组，它的元素类型是指向整型的指针
+
+/* 非法，函数只能返回标量值，不能返回数组 */
+int f()[]; // f 是个函数，它的返回值是一个整型数组
+/* 非法，数组元素必须具有相同的长度，但不同的函数显然不可能具有不同的长度 */
+int f[](); // f 似乎是个数组，它的元素类型是返回值为整型的函数
+
+int (*f[])();
+int *(*f[])();
+
+int (*f)( int, float );
+int *(*g[])( int, float )
+```
+- ###### 函数指针
+
+  函数指针常见的两个用途是转换表（jump table）和作为参数传递给两外一个函数。
+
+
+```c
+/* 初始化函数指针 */
+int f( int );
+int (*pf)( int ) = &f;
+// 函数名被使用时总是由编译器把它转化为函数指针。
+// & 操作符只是显式地说明了编译器将隐式执行的任务。
+
+/* 在函数指针被声明并被初始化之后，可使用 3 种方式调用函数 */
+int ans;
+ans = f( 25 );
+ans = (*pf)( 25 );
+ans = pf( 25 );
+```
+回调函数
+转移表
+
+- ##### 命令行参数
+  C 程序的main函数具有两个形参。
+  第 1 个通常为argc，它表示命令行参数的数目
+  第 2 个通常为argv，它指向一组参数值（本质上指向参数数组的第一个元素）
+```c
+int main( int argc, char **argv )
+```
+- ##### 字符串常量
+
 #### 14. 预处理器
-(Related contents)
+
+- ##### 预定义符号
+
+|符号|示例值|含义|
+|-|-|-|
+|`__FILE__`|"name.c"|进行编译的源文件名|
+|`__LINE__`|25|文件当前行的行号|
+|`__DATE__`|"Jan 31 1997"|文件被编译的日期|
+|`__TIME__`|"18:04:30"|文件被编译的时间|
+|`__STDC__`|1|如果编译器遵循 ANSI C，其值为 1，否则未定义|
+
+- ##### `#define`
+- 
+每当有符号`name`出现在这条指令后面，预处理器就会把它替换为`stuff`。
+```c
+#define name stuff // 为数值命名一个符号
+```
+
+如果定义中的`stuff`非常长，它可以分成几行，除了最后一行，每行末尾加`\`。
+```c
+/* 这里是利用了“相邻的字符串常量被自动连接为一个字符串”这个特性 */
+#define DEBUG_PRINT printf( "File %s line %d:" \
+                        " x=%d, y=%d, z=%d", \
+                        __FILE__, __LINE__, \
+                        x, y, z )
+```
+
+使用`#define`指令，可以把任何文本替换到程序中。
+```c
+#define reg register // 为关键字 register 创建一个简短的别名 reg
+#define do_forever for( ; ; )
+#define CASE break;case
+```
+
+允许把任何参数替换到文本中，这种实现称为宏（macro）或定义宏（defined macro）。
+```c
+#define name(parameter-list) stuff
+// parameter-list（参数列表）是由一个逗号分隔的符号列表
+// 参数列表的左括号必须与 name 紧邻
+
+#define SAQUARE(x) x * x
+SAQUARE( 5 ) // 替换为 5 * 5
+/* 问题点 */
+SAQUARE( 3 + 1 ) // 替换为 3 + 1 * 3 + 1
+
+/* 应改为 */
+#define SAQUARE(x) (x) * (x)
+```
+
+**其他......**
+
+- ##### 条件编译
+constant-expression（常量表达式）由预处理器进行求值。
+如果它的值是非零值（真），那么 statements 部分就被正常编译。
+否则预处理器就静默地删除它们。
+```c
+#if constant-expression
+    statements
+#endif
+```
+**其他......**
+
+- ##### 文件包含
+  
+**其他......**
+  
+- ##### 其他指令
+  
+**其他......**
+
 #### 15. 输入/输出函数
-(Related contents)
+
+**其他......**
+
 #### 16. 标准函数库
-(Related contents)
+
+**其他......**
+
 #### 17. 经典抽象数据类型
-(Related contents)
+
+**其他......**
+
 #### 18. 运行时环境
-(Related contents)
+
+**其他......**
 
 ### C++
 (Related contents)
