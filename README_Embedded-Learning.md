@@ -1292,32 +1292,14 @@ RTOS 通常比通用操作系统体积更小、重量更轻，因此 RTOS 非常
 (Related contents)
 
 ## Microcontrollers
-微控制器（Microcontroller Unit，MCU）是一种集成电路芯片，它将中央处理单元（CPU）、存储器（RAM和ROM）、输入/输出接口（I/O）、定时器/计数器等功能集成在一个芯片上，使其能够独立运行并控制外部设备。
+Learning based on [STM](https://www.st.com.cn "https://www.st.com.cn") official website.
 
-- 微控制器的特点
-1. 高度集成：相比于传统计算机，微控制器将多个功能模块集成在一个芯片上，减少了外部组件的需求。
-2. 低功耗：适用于嵌入式系统，能够在电池供电的情况下长时间运行。
-3. 实时性：能够快速响应外部事件，适用于工业控制、汽车电子、智能家居等领域。
-4. 多种通信接口：支持 UART、SPI、I2C 等通信协议，方便与其他设备交互。
-
-- 微控制器的应用
-    广泛应用于家电、汽车电子、工业自动化、医疗设备、智能家居、机器人等领域。
-1. 智能家居：用于控制灯光、温度、门锁等设备。
-2. 汽车电子：用于发动机控制、车载娱乐系统等。
-3. *工业自动化**：用于传感器数据采集、设备控制等。
-
-- 常见的微控制器品牌
-1. ARM Cortex 系列（广泛用于智能设备）
-2. AVR 系列（如 Arduino 使用的 ATmega328）
-3. PIC 系列（Microchip 生产）
-4. STM32 系列（[STMicroelectronics](https://www.st.com.cn "https://www.st.com.cn") 生产）
-
-## Simple definition of a Microcontroller
+### Simple definition of a Microcontroller
 
 A microcontroller (also called _**μC**_ or _**MCU**_) is an embedded computer chip that controls most of the electronic gadgets and appliances people used on a daily basis.  
 It is a compact integrated circuit designed to govern a specific operation in an embedded system.
 
-## 1.2. Microcontroller architecture
+### Microcontroller architecture
 
 A typical microcontroller includes a processor, memory and Input/Output (I/O) peripherals on a single chip. Its components may be extended to include: Digital I/O, Analog I/O, Timers, Communication interfaces, Watchdog (a timer that is responsible for the detection of timed out or locked instruction)...  
 **A processor** is a little chip present in the device that has the role of arranging the instructions and order the outputs. The manufacturer defines the integrated peripherals and the hardware capabilities. This is the basic layout of a microcontroller:  
@@ -1335,25 +1317,19 @@ A typical microcontroller includes a processor, memory and Input/Output (I/O) pe
 
 ### GPIO
 
-Getting started with GPIO
-
-
 **GPIO** stands for **general purpose input/output**. It is a type of pin found on an integrated circuit that does not have a specific function. While most pins have a dedicated purpose, such as sending a signal to a certain component, the function of a GPIO pin is customizable and can be controlled by the software.  
-GPIO 代表通用输入/输出 。它是在集成电路上找到的一种引脚，不具有特定功能。虽然大多数引脚都有专门的用途，例如向某个组件发送信号，但 GPIO 引脚的功能是可定制的，可以由软件控制。
 
- - **Pin Mode :**_ Each port bit of the general-purpose I/O (GPIO) ports can be individually configured by software in several modes:  
-    引脚模式 ： 通用 I/O （GPIO） 端口的每个端口位都可以通过软件以多种模式单独配置：  
-    -   input or output
-    -   analog
-    -   alternate function (AF).
--   _**Pin characteristics :**_
-    -   _**Input**_ : no pull-up and no pull-down or pull-up or pull-down
-    -   _**Output**_ : push-pull or open-drain with pull-up or pull-down capability
-    -   _**Alternate function**_ : push-pull or open-drain with pull-up or pull-down capability.
+- **Pin Mode** : Each port bit of the general-purpose I/O (GPIO) ports can be individually configured by software in several modes:  
+    - input or output
+    - analog
+    - alternate function (AF).
+-  **Pin characteristics** :
+    - Input : no pull-up and no pull-down or pull-up or pull-down
+    - Output : push-pull or open-drain with pull-up or pull-down capability
+    - Alternate function : push-pull or open-drain with pull-up or pull-down capability.
 
 [![GPIO Functional description graph.png](https://wiki.st.com/stm32mcu/nsfr_img_auth.php/a/a0/GPIO_Functional_description_graph.png)](https://wiki.st.com/stm32mcu/wiki/File:GPIO_Functional_description_graph.png)
 
-(Related contents)
 ### ADC/DAC
 
 A digital to analog converter is a system that converts a digital input signal or a value into an analog signal. It takes in a digital number or value as an input and converts it into an analog voltage. The voltage level corresponds to the binary number in the DAC output register.
@@ -1365,36 +1341,32 @@ A digital to analog converter is a system that converts a digital input signal o
 (Related contents)
 ### Watchdog
 
-#### What is a WDG ?
+**WDG** stands for **watchdog**. The main goal of this IP is to detect and resolve malfunctions due to software failures. The principle is to periodically refresh the WDG (or pet the dog), if the counter isn't refreshed, a system reset is generated. Also, the WDG acts as a protection since it avoids to stay stuck in a particular stage of processing. The configuration using option bytes can launch the WDG by hardware or software. Once enabled, it can only be disabled by a reset
 
-_**WDG**_ stands for _**watchdog**_. The main goal of this IP is to detect and resolve malfunctions due to software failures. The principle is to periodically refresh the WDG (or pet the dog), if the counter isn't refreshed, a system reset is generated. Also, the WDG acts as a protection since it avoids to stay stuck in a particular stage of processing. The configuration using option bytes can launch the WDG by hardware or software. Once enabled, it can only be disabled by a reset
+> [!Information]
+> The WDG (or the dog) needs to be refreshed (pet) or the system will be reset (bark)
 
-|     |
-| --- |
-| ![Info white.png](https://wiki.st.com/stm32mcu/nsfr_img_auth.php/thumb/f/f4/Info_white.png/25px-Info_white.png) Information |
-| The WDG (or the dog) needs to be refreshed (pet) or the system will be reset (bark) |
-
-## 2. WDG type
+#### WDG type
 
 There are two types of WDG :
 
--   WWDG : Window watchdog
--   IWDG : Independent watchdog
+- [WWDG](#wwdg-windowwatchdog) : Window watchdog
+- [IWDG](#iwdg-independentwatchdog) : Independent watchdog
 
-### 2.1. WWDG : Window watchdog
+##### WWDG : Window watchdog
 
-#### 2.1.1. Definition
+###### Definition
 
 The window watchdog is based on a 7-bit downcounter that can be set as free running. It can be used as a watchdog to reset the device when a problem occurs. It is clocked from the main clock. It has an early warning interrupt capability and the counter can be frozen in debug mode.
 
 #### 2.1.2. Application benefits
 
--   Best suited for applications which require the watchdog to react within an accurate time window.
--   Configurable time-window thanks to the prescaler value (For example, the STM32L476xx have a programmable timeout range from 51.2 us to 28.2ms)
--   Selectable hardware or software start
--   Early Wakeup Interrupt (EWI) available before reset happens
+- Best suited for applications which require the watchdog to react within an accurate time window.
+- Configurable time-window thanks to the prescaler value (For example, the STM32L476xx have a programmable timeout range from 51.2 us to 28.2ms)
+- Selectable hardware or software start
+- Early Wakeup Interrupt (EWI) available before reset happens
 
-#### 2.1.3. How does it work ?
+###### How does it work ?
 
 The diagram below illustrates how the WWDG operates. If the downcounter is reloaded too early or too late, the window watchdog will initiate a reset.
 
@@ -1404,20 +1376,20 @@ As can be seen on the following block diagram, the counter value and the window 
 
 [![WWDG.png](https://wiki.st.com/stm32mcu/nsfr_img_auth.php/thumb/e/e7/WWDG.png/800px-WWDG.png)](https://wiki.st.com/stm32mcu/wiki/File:WWDG.png)
 
-### 2.2. IWDG : Independent Watchdog
+##### IWDG : Independent Watchdog
 
-#### 2.2.1. Definition
+###### Definition
 
 The independent watchdog is based on a 12-bit downcounter and 8-bit prescaler. It is clocked from an independent 32 kHz internal RC (LSI) and as it operates independently from the main clock, it can operate in Stop and Standby modes. It can be used either as a watchdog to reset the device when a problem occurs, or as a free running timer for application timeout management. It is hardware or software configurable through the option bytes. The counter can be frozen in debug mode.
 
-#### 2.2.2. Application benefits
+###### Application benefits
 
--   Totally **independent** process outside the main application
--   Configurable timeout period thanks to the prescaler value (For example, the STM32L476xx have a programmable timeout range from 125us to 32.7s)
--   Selectable hardware or software start
--   Selectable low-power freeze in Standbye or Stop modes
+- Totally **independent** process outside the main application
+- Configurable timeout period thanks to the prescaler value (For example, the STM32L476xx have a programmable timeout range from 125us to 32.7s)
+- Selectable hardware or software start
+- Selectable low-power freeze in Standbye or Stop modes
 
-#### 2.2.3. How does it work ?
+###### How does it work ?
 
 The IWDG architecture is represented below : [![IWDG.png](https://wiki.st.com/stm32mcu/nsfr_img_auth.php/0/08/IWDG.png)](https://wiki.st.com/stm32mcu/wiki/File:IWDG.png)
 
