@@ -1224,8 +1224,69 @@ constant-expression（常量表达式）由预处理器进行求值。
 
 学习[FreeRTOS官网](https://www.freertos.org/zh-cn-cmn-s "https://www.freertos.org/zh-cn-cmn-s")内容。
 
+###### 什么是通用操作系统？
+
+操作系统是支持计算机基本功能的计算机程序， 为在计算机上运行的程序（或_应用程序_）提供服务。应用程序提供计算机用户 想要或需要的功能。操作系统提供的服务使得应用程序写入更快、更简单、 并且更易于维护。如果您正在阅读此网页，说明您正在使用网络浏览器（提供您感兴趣的功能的应用程序 ），该浏览器本身会在操作系统提供的环境中运行 。
+
+##### 什么是 RTOS？
+
+大多数操作系统似乎能同时执行多个程序。这称为多任务处理。实际上， 每个处理器内核在任何给定时间点都只能运行一个执行线程。操作系统中 一个名为调度器的部分负责决定何时运行哪个程序， 并通过在每个程序之间快速切换以造成同时执行的假象。
+
+操作系统的类型取决于调度器如何决定何时运行哪个程序。例如， 多用户操作系统（如 Unix）中使用的调度器将确保每个用户都能获得合理的处理时间 。再比如，桌面操作系统（如 Windows）中的调度器会努力确保计算机对用户作出响应。 （注意：FreeRTOS 并非大型操作系统，也不是为在台式 计算机级处理器上运行而设计的，我使用这些例子纯粹是因为它们是读者熟悉的系统。）
+
+实时操作系统中的调度器旨在提供 可预测的（通常描述为 _确定性_）执行模式。这对嵌入式系统而言意义重大，因为嵌入式系统 经常有实时要求。实时要求是指定嵌入式系统 必须在严格定义的时间内（_截止时间_）响应某个事件。只有当操作系统调度器的行为 可以预测（因此具有确定性）时， 才能保证满足实时要求。
+
+传统的小型实时调度器（如 FreeRTOS 中使用的调度器） 通过允许用户为每个执行线程分配优先级来实现确定性。然后，调度器根据优先级来判断 下一个要运行的执行线程。在 FreeRTOS 中，执行线程称为 _任务_。
+
+##### RTOS 基础知识
+
+实时操作系统 (RTOS) 是一种体积小巧、确定性强的计算机操作系统。 RTOS 通常用于需要在严格时间限制内对外部事件做出反应的嵌入式系统，如医疗设备和汽车电子控制单元 (ECU)。 通常，此类嵌入式系统中只有一两项功能需要确定性时序，即使嵌入式系统不需要严格的实时反应，使用 RTOS 仍能提供诸多优势。
+
+RTOS 通常比通用操作系统体积更小、重量更轻，因此 RTOS 非常适用于 内存、计算和功率受限的设备。
+
+##### 多任务处理
+
+**内核**是操作系统的核心组件。Linux 等通用操作系统采用的内核 允许多个用户看似同时访问计算机的处理器。这些用户可以各自执行多个程序，看起来像是并发运行。
+
+每个执行的程序由操作系统控制下的一个或多个**线程**实现。如果操作系统能够以这种方式执行多个线程，则称为**多任务处理**。 像 FreeRTOS 这样的小型 RTOS 通常将线程称为**任务**，因为它们不支持虚拟内存，因此进程和线程之间没有区别。
+
+使用多任务操作系统可以简化原本复杂的软件应用程序的设计：
+
+-   操作系统的多任务处理和任务间通信功能允许将复杂的应用程序 划分为一组更小且更易于管理的任务。
+-   这种划分可以简化软件测试，确保团队分工明确，并促进代码复用。
+-   复杂的时序和排序细节将由 RTOS 内核负责，从而减轻了应用程序代码的负担。
+
+
+##### 多任务处理与并发
+
+常规单核处理器一次只能执行一个任务，但多任务操作系统可以快速切换任务， 使所有任务**看起来**像是同时在执行。下图展示了 三个任务相对于时间的执行模式。任务名称用不同颜色标示，并写在左侧。时间从左向右移动， 彩色线条显示在特定时间执行的任务。上方展示了所感知的并发执行模式， 下方展示了实际的多任务执行模式。
+
+![TaskExecution.gif](https://www.freertos.org/media/2018/TaskExecution.gif)
+
+##### 调度
+
+**调度器**是内核中负责决定在特定时间应执行什么任务的部分。内核 可以在任务的生命周期内多次暂停并恢复该任务。 如果任务 B 取代任务 A 成为当前执行的任务 （即任务 A 暂停，任务 B 恢复），我们就可以称任务 A “换出”，任务 B “换入”。
+
+**调度策略**是调度器用来决定何时执行哪个任务的算法。在（非实时）多用户系统中， 调度策略通常会确保每个任务获得“公平”的处理器时间。实时嵌入式系统中使用的策略详见下文。
+
+只有当调度算法决定执行不同的任务时，任务才会换出。这种切换可能在当前 执行的任务不知情的情况下发生，例如调度算法响应外部事件或定时器到期时； 还可能 发生在执行任务显式调用某个导致其**让出**、**休眠**（也称为**延迟**）或**阻塞**的 API 函数时。
+
+如果某任务让出，调度算法可能会再次选择同一任务执行。如果某任务休眠， 则在指定的延迟时间到期前不可被选择。 同样，如果某任务阻塞， 则在特定事件发生（例如，数据到达 UART）或超时期满之前将不可被选择。
+
+操作系统内核负责管理这些任务状态和转换， 确保根据调度算法和每个任务的当前状态在给定时间选择适当的任务执行。
+
+
+
+
+
 
 (Related contents)
+
+
+
+
+
+
 
 ### Embedded Linux
 (Related contents)
@@ -1249,7 +1310,19 @@ constant-expression（常量表达式）由预处理器进行求值。
 1. ARM Cortex 系列（广泛用于智能设备）
 2. AVR 系列（如 Arduino 使用的 ATmega328）
 3. PIC 系列（Microchip 生产）
-4. STM32 系列（STMicroelectronics 生产）
+4. STM32 系列（[STMicroelectronics](https://www.st.com.cn "https://www.st.com.cn") 生产）
+
+## Simple definition of a Microcontroller
+
+A microcontroller (also called _**μC**_ or _**MCU**_) is an embedded computer chip that controls most of the electronic gadgets and appliances people used on a daily basis.  
+It is a compact integrated circuit designed to govern a specific operation in an embedded system.
+
+## 1.2. Microcontroller architecture
+
+A typical microcontroller includes a processor, memory and Input/Output (I/O) peripherals on a single chip. Its components may be extended to include: Digital I/O, Analog I/O, Timers, Communication interfaces, Watchdog (a timer that is responsible for the detection of timed out or locked instruction)...  
+**A processor** is a little chip present in the device that has the role of arranging the instructions and order the outputs. The manufacturer defines the integrated peripherals and the hardware capabilities. This is the basic layout of a microcontroller:  
+[![newchart.jpg](https://wiki.st.com/stm32mcu/nsfr_img_auth.php/thumb/3/34/newchart.jpg/500px-newchart.jpg)](https://wiki.st.com/stm32mcu/wiki/File:newchart.jpg)
+
 
 - [GPIO](#gpio)  
 - [ADC/DAC](#adcdac)    
@@ -1261,19 +1334,117 @@ constant-expression（常量表达式）由预处理器进行求值。
 - [Clock Management](#clock-management)  
 
 ### GPIO
+
+Getting started with GPIO
+
+
+**GPIO** stands for **general purpose input/output**. It is a type of pin found on an integrated circuit that does not have a specific function. While most pins have a dedicated purpose, such as sending a signal to a certain component, the function of a GPIO pin is customizable and can be controlled by the software.  
+GPIO 代表通用输入/输出 。它是在集成电路上找到的一种引脚，不具有特定功能。虽然大多数引脚都有专门的用途，例如向某个组件发送信号，但 GPIO 引脚的功能是可定制的，可以由软件控制。
+
+ - **Pin Mode :**_ Each port bit of the general-purpose I/O (GPIO) ports can be individually configured by software in several modes:  
+    引脚模式 ： 通用 I/O （GPIO） 端口的每个端口位都可以通过软件以多种模式单独配置：  
+    -   input or output
+    -   analog
+    -   alternate function (AF).
+-   _**Pin characteristics :**_
+    -   _**Input**_ : no pull-up and no pull-down or pull-up or pull-down
+    -   _**Output**_ : push-pull or open-drain with pull-up or pull-down capability
+    -   _**Alternate function**_ : push-pull or open-drain with pull-up or pull-down capability.
+
+[![GPIO Functional description graph.png](https://wiki.st.com/stm32mcu/nsfr_img_auth.php/a/a0/GPIO_Functional_description_graph.png)](https://wiki.st.com/stm32mcu/wiki/File:GPIO_Functional_description_graph.png)
+
 (Related contents)
 ### ADC/DAC
+
+A digital to analog converter is a system that converts a digital input signal or a value into an analog signal. It takes in a digital number or value as an input and converts it into an analog voltage. The voltage level corresponds to the binary number in the DAC output register.
+
 (Related contents)
 ### Timers/Counters
 (Related contents)
 ### PWM
 (Related contents)
 ### Watchdog
+
+#### What is a WDG ?
+
+_**WDG**_ stands for _**watchdog**_. The main goal of this IP is to detect and resolve malfunctions due to software failures. The principle is to periodically refresh the WDG (or pet the dog), if the counter isn't refreshed, a system reset is generated. Also, the WDG acts as a protection since it avoids to stay stuck in a particular stage of processing. The configuration using option bytes can launch the WDG by hardware or software. Once enabled, it can only be disabled by a reset
+
+|     |
+| --- |
+| ![Info white.png](https://wiki.st.com/stm32mcu/nsfr_img_auth.php/thumb/f/f4/Info_white.png/25px-Info_white.png) Information |
+| The WDG (or the dog) needs to be refreshed (pet) or the system will be reset (bark) |
+
+## 2. WDG type
+
+There are two types of WDG :
+
+-   WWDG : Window watchdog
+-   IWDG : Independent watchdog
+
+### 2.1. WWDG : Window watchdog
+
+#### 2.1.1. Definition
+
+The window watchdog is based on a 7-bit downcounter that can be set as free running. It can be used as a watchdog to reset the device when a problem occurs. It is clocked from the main clock. It has an early warning interrupt capability and the counter can be frozen in debug mode.
+
+#### 2.1.2. Application benefits
+
+-   Best suited for applications which require the watchdog to react within an accurate time window.
+-   Configurable time-window thanks to the prescaler value (For example, the STM32L476xx have a programmable timeout range from 51.2 us to 28.2ms)
+-   Selectable hardware or software start
+-   Early Wakeup Interrupt (EWI) available before reset happens
+
+#### 2.1.3. How does it work ?
+
+The diagram below illustrates how the WWDG operates. If the downcounter is reloaded too early or too late, the window watchdog will initiate a reset.
+
+[![WWDG Refresh.png](https://wiki.st.com/stm32mcu/nsfr_img_auth.php/thumb/e/e8/WWDG_Refresh.png/900px-WWDG_Refresh.png)](https://wiki.st.com/stm32mcu/wiki/File:WWDG_Refresh.png)
+
+As can be seen on the following block diagram, the counter value and the window value are compared in order to evaluate the time to refresh the downcounter in the configurable window.
+
+[![WWDG.png](https://wiki.st.com/stm32mcu/nsfr_img_auth.php/thumb/e/e7/WWDG.png/800px-WWDG.png)](https://wiki.st.com/stm32mcu/wiki/File:WWDG.png)
+
+### 2.2. IWDG : Independent Watchdog
+
+#### 2.2.1. Definition
+
+The independent watchdog is based on a 12-bit downcounter and 8-bit prescaler. It is clocked from an independent 32 kHz internal RC (LSI) and as it operates independently from the main clock, it can operate in Stop and Standby modes. It can be used either as a watchdog to reset the device when a problem occurs, or as a free running timer for application timeout management. It is hardware or software configurable through the option bytes. The counter can be frozen in debug mode.
+
+#### 2.2.2. Application benefits
+
+-   Totally **independent** process outside the main application
+-   Configurable timeout period thanks to the prescaler value (For example, the STM32L476xx have a programmable timeout range from 125us to 32.7s)
+-   Selectable hardware or software start
+-   Selectable low-power freeze in Standbye or Stop modes
+
+#### 2.2.3. How does it work ?
+
+The IWDG architecture is represented below : [![IWDG.png](https://wiki.st.com/stm32mcu/nsfr_img_auth.php/0/08/IWDG.png)](https://wiki.st.com/stm32mcu/wiki/File:IWDG.png)
+
+As can be seen on the block diagram above, IWDG registers are located in the CORE voltage domain while its functions are in the VDD voltage domain. The 8-bit prescaler is used to **divide the LSI oscillator frequency.** When the IWDG is started, the 12-bit counter starts counting down from the reset value of 0xFFF. To refresh the IWDG counter, the **Key value** (0xAAAA) must be written in the Key register to reload the counter value. If the downcounter reaches the end of the count value (0x000), a system reset is generated.
+
+|     |
+| --- |
+| ![Info white.png](https://wiki.st.com/stm32mcu/nsfr_img_auth.php/thumb/f/f4/Info_white.png/25px-Info_white.png) Information |
+| For more details, check the dedicated IWDG chapter in the product reference manual. |
 (Related contents)
 ### Interrupts
 (Related contents)
 ### DMA
-(Related contents)
+
+_**DMA**_ stands for Direct Memory Access controller.  
+DMA is a bus master and system peripheral providing high-speed data transfers between peripherals and memory, as well as memory-to-memory.  
+Data can be quickly moved by DMA _**without any CPU action**_, keeping CPU resources free for other operations.  
+
+This article uses the STM32L476 device as an example. The STM32L476 device embeds 2 DMAs: DMA1 and DMA2.  
+
+Each channel is dedicated to managing memory access requests from one or more peripherals. The two DMA controllers have 14 channels in total. Each channel is dedicated to managing memory access requests from one or more peripherals. Each channel has an arbiter to handle priority between DMA requests.
+
+|     |     |     |
+| --- | --- | --- |
+| **DMA features** | DMA1 | DMA2 |
+| **Number of regular channels** | 7   | 7   |
+
 ### Clock Management
 (Related contents)
 
@@ -1294,9 +1465,92 @@ constant-expression（常量表达式）由预处理器进行求值。
 - [SPI](#spi)
 
 #### UART
-(Related contents)
+
+The universal synchronous/asynchronous receiver transmitter (USART/UART) offers a flexible means of full-duplex data exchange with external equipment requiring an industry standard NRZ asynchronous serial data format. USART can operate with a very wide range of baud rates using a programmable baud rate generator.  
+It supports synchronous one-way communication and half-duplex single-wire communication, as well as multiprocessor communications. It also supports the LIN (Local Interconnect Network), Smartcard protocol and IrDA (Infrared Data Association) SIR ENDEC specifications and Modem operations (CTS/RTS).  
+High speed data communication is possible by using the DMA (direct memory access) for multibuffer configuration. Also, the UART can be used with interrupt.  
+This article goes through the following UART features:  
+
+- Simple UART communication in polling mode  
+- UART with Interrupt  
+- UART with DMA
+
 #### I2C
-(Related contents)
+
+I2C is a two-wire serial communication system used between integrated circuits which was originally created by Philips Semiconductors back in 1982.  
+The I2C is a multi-master, multi-slave, synchronous, bidirectional, half-duplex serial communication bus.  
+
+-   _**SDA (Serial Data)**_ is the line on which master and slave send or receive the information (sequence of bits).
+-   _**SCL (Serial Clock)**_ is the clock-dedicated line for data flow synchronization.
+
+[![i2c buq.png](https://wiki.st.com/stm32mcu/nsfr_img_auth.php/thumb/4/4f/i2c_buq.png/600px-i2c_buq.png)](https://wiki.st.com/stm32mcu/wiki/File:i2c_buq.png)  
+SDA and SCL lines need to be pulled up with resistors. The value of these resistors depends on the bus length (the bus capacitance) and the transmission speed. The common value is 4.7kΩ. In any case, there are many guides to size them and we refer their reading to the more attentive reader.
+
+#### 1.1. I2C Modes
+
+-   _**Standard-Mode (Sm)**_ with a bit rate up to 100 kbit/s
+-   _**Fast-Mode (Fm)**_ with a bit rate up to 400 kbit/s
+-   _**Fast-Mode Plus (Fm+)**_ with a bit rate up to 1 Mbit/s
+
+#### 1.2. I2C Frame
+
+[![i2c trame.png](https://wiki.st.com/stm32mcu/nsfr_img_auth.php/thumb/c/c9/i2c_trame.png/500px-i2c_trame.png)](https://wiki.st.com/stm32mcu/wiki/File:i2c_trame.png)
+
+-   Start Condition (S)
+-   Stop Condition (P)
+-   Repeated Start (Restart) Condition (Sr)
+-   Acknowledge ACK (A)
+-   Not Acknowledge NACK (/A)
+
+#### 1.3. STM32 I2C Mode selection
+
+The interface can operate in one of the four following modes:  
+
+-   Slave transmitter
+-   Slave receiver
+-   Master transmitter
+-   Master receiver  
+    
+
+#### 1.4. Main I2C HAL functions
+
+Based on STM32Cube HAL functions, I2C data transfer can be performed in 3 modes: Blocking Mode, Interrupt Mode or DMA Mode  
+
+-   **Blocking Mode:**  
+    
+
+The communication is performed in polling mode. The status of all data processing is returned by the same function after finishing transfer.  
+
+HAL_I2C_Master_Transmit() 
+HAL_I2C_Master_Receive()
+HAL_I2C_Slave_Transmit()
+HAL_I2C_Slave_Receive()
+HAL_I2C_Mem_Write()
+HAL_I2C_Mem_Read() 
+
+-   **Non-blocking modes**
+
+The communication is performed using Interrupts or DMA. These functions return the status of the transfer startup.  
+The end of the data processing will be indicated through the dedicated I2C IRQ when using Interrupt mode or the DMA IRQ when using DMA mode.
+
+-   **Interrupt Mode:**
+
+HAL_I2C_Master_Transmit_IT()  
+HAL_I2C_Master_Receive_IT()
+HAL_I2C_Slave_Transmit_IT()  
+HAL_I2C_Slave_Receive_IT() 
+HAL_I2C_Mem_Write_IT()  
+HAL_I2C_Mem_Read_IT()  
+
+-   **DMA Mode:**
+
+HAL_I2C_Master_Transmit_DMA()  
+HAL_I2C_Master_Receive_DMA() 
+HAL_I2C_Slave_Transmit_DMA() 
+HAL_I2C_Slave_Receive_DMA()
+HAL_I2C_Mem_Write_DMA()  
+HAL_I2C_Mem_Read_DMA()
+
 #### SPI
 (Related contents)
 
