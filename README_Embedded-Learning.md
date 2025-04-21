@@ -1350,8 +1350,8 @@ A digital to analog converter is a system that converts a digital input signal o
 
 There are two types of WDG :
 
-- [WWDG](#wwdg-windowwatchdog) : Window watchdog
-- [IWDG](#iwdg-independentwatchdog) : Independent watchdog
+- [WWDG](#wwdg--window-watchdog) : Window watchdog
+- [IWDG](#iwdg--independent-watchdog) : Independent watchdog
 
 ##### WWDG : Window watchdog
 
