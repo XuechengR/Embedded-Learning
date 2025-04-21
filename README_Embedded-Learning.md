@@ -1359,7 +1359,7 @@ There are two types of WDG :
 
 The window watchdog is based on a 7-bit downcounter that can be set as free running. It can be used as a watchdog to reset the device when a problem occurs. It is clocked from the main clock. It has an early warning interrupt capability and the counter can be frozen in debug mode.
 
-#### 2.1.2. Application benefits
+##### Application benefits
 
 - Best suited for applications which require the watchdog to react within an accurate time window.
 - Configurable time-window thanks to the prescaler value (For example, the STM32L476xx have a programmable timeout range from 51.2 us to 28.2ms)
@@ -1395,13 +1395,12 @@ The IWDG architecture is represented below : [![IWDG.png](https://wiki.st.com/st
 
 As can be seen on the block diagram above, IWDG registers are located in the CORE voltage domain while its functions are in the VDD voltage domain. The 8-bit prescaler is used to **divide the LSI oscillator frequency.** When the IWDG is started, the 12-bit counter starts counting down from the reset value of 0xFFF. To refresh the IWDG counter, the **Key value** (0xAAAA) must be written in the Key register to reload the counter value. If the downcounter reaches the end of the count value (0x000), a system reset is generated.
 
-|     |
-| --- |
-| ![Info white.png](https://wiki.st.com/stm32mcu/nsfr_img_auth.php/thumb/f/f4/Info_white.png/25px-Info_white.png) Information |
-| For more details, check the dedicated IWDG chapter in the product reference manual. |
-(Related contents)
+> [!Information]
+> For more details, check the dedicated IWDG chapter in the product reference manual.
+
 ### Interrupts
 (Related contents)
+
 ### DMA
 
 _**DMA**_ stands for Direct Memory Access controller.  
