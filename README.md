@@ -1,7 +1,7 @@
 # Embedded-Learning
 Self-study Embedded & Summary (Beginner Edition)
 
-Based on the following repositories.
+Based on the following repositories
 [GitHub - m3y54m/Embedded-Engineering-Roadmap](https://github.com/m3y54m/Embedded-Engineering-Roadmap "https://github.com/m3y54m/Embedded-Engineering-Roadmap")
 
 # Catalog
