@@ -39,7 +39,7 @@ Based on the following repositories.
 
 
 
-#### 基本概念[top]()
+#### 基本概念[↑](#c)
 
 源代码 编译 &rarr; 目标代码 与函数库 链接 &rarr; 可执行文件
 
