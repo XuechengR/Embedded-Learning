@@ -6,7 +6,7 @@ Based on the following repositories
 
 # Catalog
 - [编程语言](#programming-languages)
-  - [C](#c)  
+  - [C](https://github.com/XuechengR/Embedded-Learning/tree/main/Embedded-Learning/Programming%20Languages/C/C.md)
   - [C++](#c-1)  
   - [Python](#python)
 - [编程基础](#programming-fundamentals)
