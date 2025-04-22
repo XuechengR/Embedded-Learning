@@ -5,17 +5,17 @@ Based on the following repositories
 [GitHub - m3y54m/Embedded-Engineering-Roadmap](https://github.com/m3y54m/Embedded-Engineering-Roadmap "https://github.com/m3y54m/Embedded-Engineering-Roadmap")
 
 # Catalog
-1. [编程语言](#programming-languages)
-2. [编程基础](#programming-fundamentals)
-3. [操作系统](#operating-systems)
-4. [微控制器](#microcontrollers)
-5. [接口与协议](#interfaces--protocols)
+- [编程语言](#programming-languages)
+  - [C](#c)  
+  - [C++](#c-1)  
+  - [Python](#python)
+- [编程基础](#programming-fundamentals)
+  
+- [操作系统](#operating-systems)
+- [微控制器](#microcontrollers)
+- [接口与协议](#interfaces--protocols)
 
 ## Programming Languages
-- [C](#c)  
-- [C++](#c-1)  
-- [Python](#python)
-
 ### C
 学习书籍《C和指针》（Pointers On C）
 
